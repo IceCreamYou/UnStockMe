@@ -1,0 +1,52 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body, h1, h2, h3, h4, div, ul, p, pre {
+  color: black;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 40px;
+  margin: 20px 0 10px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 32px;
+  margin: 15px 0 10px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 24px;
+  margin: 10px 0 5px;
+}
+
+pre {
+  font-family: monospace;
+  white-space: pre;
+}
+
+p, pre {
+  padding-bottom: 10px;
+}
+
+li {
+  list-style-position: inside;
+}
+
+#footer {
+  border: 1px dotted lightGray;
+  margin-top: 30px;
+  padding-top: 10px;
+  text-align: center;
+}
