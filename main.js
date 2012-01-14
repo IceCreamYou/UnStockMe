@@ -141,7 +141,8 @@ Array.prototype.getRandomElement = function() {
 Object.prototype.keys = function(){
 	var keys = [];
 	for (var key in this) {
-		keys.push(key);
+		if (this.hasOwnProperty(key))
+			keys.push(key);
 	}
 	return keys;
 }
