@@ -138,23 +138,53 @@ Array.prototype.getRandomElement = function() {
 	return this[i];
 }
 
+Object.prototype.keys = function(){
+	var keys = [];
+	for (var key in this) {
+		keys.push(key);
+	}
+	return keys;
+}
+
 
 // POST-TRAINING --------------------------------------------------------------
 
-function event(description) {
+function event(description, delta, stockName) {
 	this.description = description;
-	this.stockName = 'BEER';
-	this.getDelta = function() {};
+	this.origStockName = stockName;
+	this.stockName = function() {
+		if (this.origStockName) {
+			return this.origStockName;
+		}
+		return stocks.keys().getRandomElement();
+	};
+	this.getDelta = delta;
 }
 
 function turn() {
 	calculateNewPrices();
+	turnEvent = eventTypes.getRandomElement();
+	$('.info').html(turnEvent.description(turnEvent.stockName()));
+	drawAmounts();
 }
 
 function calculateNewPrices() {
 	for (stock in stocks) {
 		var stockValue = stocks[stock].value;
-		stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));	
+		if (turnEvent && stock == turnEvent.stockName) {
+			stocks[stock].changeValue(stockValue + turnEvent.getDelta(stock));	
+		}
+		else {
+			stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));
+		}
 	}
 }
-//TEST COMMENT
+
+var eventTypes = [
+                  new event(function(name) {
+                	  name +' description goes here';
+                  }, function(name) {
+                	  var stockPercent = stocks[stock].value * 0.1;
+                	  getRandBetween(-stockPercent, stockPercent);
+                  }, null),
+];
