@@ -36,11 +36,14 @@ $(document).ready(function() {
 		});
 		e.preventDefault();
 	});
+	
+	stocks['BEER'].buy(money / stocks['BEER'].value);
+	drawAmounts();
 });
 
 // STOCKS ---------------------------------------------------------------------
 
-var stock = function(name, value) {
+function stock(name, value) {
 	this.amount = 0;
 	this.name = name;
 	this.value = value;
@@ -55,7 +58,7 @@ var stock = function(name, value) {
 			money -= cost;
 			this.amount += amount;
 			$('td.cash + td').html(money);
-			// TODO: update display of amounts
+			drawAmounts();
 			return true;
 		}
 		return Math.floor(money / this.value);
@@ -65,7 +68,7 @@ var stock = function(name, value) {
 			this.amount -= amount;
 			money += amount * this.value;
 			$('td.cash + td').html(money);
-			// TODO: update display of amounts
+			drawAmounts();
 			return true;
 		}
 		return this.amount;
@@ -73,17 +76,47 @@ var stock = function(name, value) {
 }
 
 function buy() {
+	var values = validate();
+	if (values) {
+		stocks[values.name].buy(values.amount);
+	}
 }
 
 function sell() {
+	var values = validate();
+	if (values) {
+		stocks[values.name].sell(values.amount);
+	}
+}
+
+function validate() {
+	var val = parseInt($('#amount').val());
+	if (val == NaN || val < 1) {
+		alert('The number of shares of stock you want to trade must be a positive integer.');
+		$('#amount').addClass('error');
+		return false;
+	}
+	else {
+		$('#amount').removeClass('error');
+	}
+	var name = $('#stock').val();
+	if (!stocks[name]) {
+		$('#stock').addClass('error');
+		return false;
+	}
+	else {
+		$('#stock').removeClass('error');
+	}
+	return {'name': name, 'amount': val};
 }
 
 function drawAmounts() {
 	var $tbody = $('#stocks tbody');
 	$tbody.empty();
 	for (name in stocks) {
-		$body.append();// TODO HERE
+		$tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
 	}
+	$tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount"></td></tr>');
 }
 
 

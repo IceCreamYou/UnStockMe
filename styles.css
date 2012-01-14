@@ -57,6 +57,10 @@ table {
   width: 100%;
 }
 
+thead {
+  font-style: italic;
+}
+
 #main {
   margin: 0 auto;
   width: 960px;
@@ -78,14 +82,14 @@ table {
   border: 1px solid #CCCCCC;
   margin-top: 20px;
   padding: 15px;
-  width: 700px;
+  width: 668px;
   /* display: none; */
 }
 
 #continue {
   margin-top: 20px;
   padding: 15px;
-  width: 700px;
+  width: 683px;
 }
 
 #continue input {
@@ -178,4 +182,8 @@ label {
 #actions {
   display: inline;
   margin-top: 1em;
+}
+
+.error {
+  border: 1px solid red;
 }
