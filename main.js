@@ -1,11 +1,9 @@
 /**
  *
 display the delta for each stock
-display a notice that the trade was successful
 display total portfolio value
 style # shares like price in table
 only show stocks in the table that we've introduced so far
-don't let events repeat
 highlight terms in info
 come up with more terms
 introduce more trading concepts
@@ -262,6 +260,7 @@ function turn() {
 	if (turnEvent)
 		$('.note').html(turnEvent.note());
 	turnEvent = eventTypes.getRandomElement();
+	eventTypes.remove(turnEvent);
 	$('.info').html(turnEvent.description());
 	drawAmounts();
 }
