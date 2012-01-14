@@ -136,3 +136,15 @@ Array.prototype.getRandomElement = function() {
 	var i = getRandBetween(0, this.length-1);
 	return this[i];
 }
+
+function turn() {
+	calcNewPrices();
+	display();	
+}
+
+function calcNewPrices() {
+	for (stock in stocks) {
+		var stockValue = stocks[stock].value;
+		stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));	
+	}
+}
