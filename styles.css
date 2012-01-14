@@ -92,12 +92,12 @@ thead {
 #left-column {
   float: left;
   padding-right: 20px;
-  width: 700px;
+  width: 620px; /* 960 - 320 - 20 = body width - right column width - padding */
 }
 
 #right-column {
   float: right;
-  width: 240px;
+  width: 320px;
 }
 
 #controlWrapper {
@@ -106,13 +106,13 @@ thead {
   display: none;
   margin-top: 20px;
   padding: 15px;
-  width: 668px;
+  width: 588px;
 }
 
 #continue {
   margin-top: 20px;
   padding: 15px;
-  width: 683px;
+  width: 603px;
 }
 
 #continue input {
