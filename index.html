@@ -19,33 +19,47 @@
     </div>
     <div id="main">
       <div id="content">
-        <noscript>You must have JavaScript enabled to play this game.</noscript>
-        <p class="note">This is information about the outcome of the previous decision.</p>
-        <p class="info">This is information about the decision you're about to make.</p>
-        <table id="stocks">
-          <tbody>
-            <tr>
-              <td class="stock">BEER</td><td class="value">15</td>
-              <td class="stock cash">Cash</td><td class="value">0</td>
-            </tr>
-          </tbody>
-        </table>
-        <div id="terms">
-          <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+        <div id="left-column">
+          <noscript>You must have JavaScript enabled to play this game.</noscript>
+          <p class="note">This is information about the outcome of the previous decision.</p>
+          <p class="info">This is information about the decision you're about to make.</p>
         </div>
+        <div id="right-column">
+          <table id="stocks">
+            <tbody>
+              <tr>
+                <td class="stock">BEER</td><td class="value">15</td>
+              </tr>
+              <tr>
+                <td class="stock cash">Cash</td><td class="value">0</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="terms">
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
       </div><!-- /content -->
+      <div id="controlWrapper">
       <form id="controls" action="index.html">
-        <input type="text" id="amount" maxlength="11" size="11" name="amount" />
-        <select id="stock" name="stock">
-          <option value="BEER" selected="selected">BEER</option>
-        </select>
+        <label>Amount
+          <input type="text" id="amount" maxlength="11" size="11" name="amount" />
+        </label>
+        <label>Stock
+          <select id="stock" name="stock">
+            <option value="BEER" selected="selected">BEER</option>
+          </select>
+        </label>
         <div id="actions">
-          <input type="submit" id="buy" name="buy" />
-          <input type="submit" id="sell" name="sell" />
+          <input type="submit" id="buy" name="buy" value="Buy" />
+          <input type="submit" id="sell" name="sell" value="Sell" />
         </div>
       </form><!-- /controls -->
+      </div>
+      <div style="clear: both;"></div>
       <form id="continue" action="index.html">
-        <input type="submit" id="next" name="next" />
+        <input type="submit" id="next" name="next" value="Continue" />
       </form><!-- /continue -->
     </div><!-- /main -->
     <div id="footer">

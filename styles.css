@@ -53,9 +53,45 @@ li {
   margin-left: 15px;
 }
 
+table {
+  width: 100%;
+}
+
 #main {
   margin: 0 auto;
   width: 960px;
+}
+
+#left-column {
+  float: left;
+  padding-right: 20px;
+  width: 700px;
+}
+
+#right-column {
+  float: right;
+  width: 240px;
+}
+
+#controlWrapper {
+  background-color: #EEEEEE;
+  width: 700px;
+  /* display: none; */
+}
+
+#controls > * {
+  float: left;
+  margin-right: 15px;
+}
+
+label select,
+label input {
+  display: block;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #footer {
@@ -72,6 +108,14 @@ li {
 
 /* Specific styles */
 
+#right-column table,
+#right-column div {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 .note {
   background-color: #EEEEEE;
   border: 1px solid #CCCCCC;
@@ -80,4 +124,13 @@ li {
   line-height: 18px;
   margin: 0;
   padding: 15px;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+#actions {
+  display: inline;
+  margin-top: 1em;
 }

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var submitButton = null;
-	$('#controls').hide().submit(function(e) {
+	$('#controls').submit(function(e) {
 		e.preventDefault();
 	}).on('keyup mouseup', function(e) {
 		submitButton = e.target.name;
