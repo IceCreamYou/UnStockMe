@@ -149,7 +149,7 @@ Object.prototype.keys = function(){
 
 // POST-TRAINING --------------------------------------------------------------
 
-function event(description, delta, stockName) {
+function event(description, delta, note, stockName) {
 	this.description = description;
 	this.origStockName = stockName;
 	this.stockName = function() {
@@ -158,21 +158,27 @@ function event(description, delta, stockName) {
 		}
 		return stocks.keys().getRandomElement();
 	};
-	this.getDelta = delta;
+	this.deltaFunc = delta;
+	this.delta = 0;
+	this.getDelta = function() {
+		this.delta = this.deltaFunc();
+		return this.delta;
+	};
+	this.note = note;
 }
 
 function turn() {
 	calculateNewPrices();
 	turnEvent = eventTypes.getRandomElement();
-	$('.info').html(turnEvent.description(turnEvent.stockName()));
+	$('.info').html(turnEvent.description());
 	drawAmounts();
 }
 
 function calculateNewPrices() {
 	for (stock in stocks) {
 		var stockValue = stocks[stock].value;
-		if (turnEvent && stock == turnEvent.stockName) {
-			stocks[stock].changeValue(stockValue + turnEvent.getDelta(stock));	
+		if (turnEvent && stock == turnEvent.stockName()) {
+			stocks[stock].changeValue(stockValue + turnEvent.getDelta());	
 		}
 		else {
 			stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));
@@ -181,10 +187,33 @@ function calculateNewPrices() {
 }
 
 var eventTypes = [
+                  new event(function() {
+                	  return this.stockName() + ' is releasing their quarterly earnings report tomorrow. Wall street\'s analysts think they will hit their predictions, but you can never be sure.';
+                  }, function() {
+                	  var stockPercent = stocks[this.stockName()].value * 0.15;
+					  if (math.Random() > .7) {
+						stockPercent *= -1;  
+					  }
+                	  return stockPercent;
+                  }, function() {
+					  return 'The change was '+ this.delta;
+				  }, null),
                   new event(function(name) {
                 	  name +' description goes here';
                   }, function(name) {
-                	  var stockPercent = stocks[stock].value * 0.1;
+                	  var stockPercent = stocks[name].value * 0.1;
+                	  getRandBetween(-stockPercent, stockPercent);
+                  }, null),
+                  new event(function(name) {
+                	  name +' description goes here';
+                  }, function(name) {
+                	  var stockPercent = stocks[name].value * 0.1;
+                	  getRandBetween(-stockPercent, stockPercent);
+                  }, null),
+                  new event(function(name) {
+                	  name +' description goes here';
+                  }, function(name) {
+                	  var stockPercent = stocks[name].value * 0.1;
                 	  getRandBetween(-stockPercent, stockPercent);
                   }, null),
 ];
