@@ -189,32 +189,83 @@ function calculateNewPrices() {
 
 var eventTypes = [
                   new event(function() {
-                	  return this.stockName() + ' is releasing their quarterly earnings report tomorrow. Wall street\'s analysts think they will hit their predictions, but you can never be sure.';
+                	  return this.stockName() + ' is releasing their quarterly earnings report tomorrow. Wall street analysts think they will hit their predictions, but you can never be sure.';
+                  }, function() {
+                	  var stockPercent = stocks[this.stockName()].value * 0.1;
+                	  return getRandBetween(-stockPercent*.5, stockPercent*1.5);
+                  }, function() {
+					  if (this.delta < 0) {
+						  return this.stockName() + ' missed their earnings predictions. Stock price fell by ' + this.delta + '%.';
+					  }
+					  else if (this.delta > 0) {
+						  return this.stockName() + ' exceeded their earnings predictions. Stock price rose by ' + this.delta + '%.';
+					  }
+					  else {
+						  return this.stockName() + ' exactly hit their earnings predictions. Stock price remained the same.';
+					  }
+				  }, null),
+                 new event(function() {
+                	  return this.stockName() + ' is holding a surprise press release tomorrow. The news could be good or bad.';
                   }, function() {
                 	  var stockPercent = stocks[this.stockName()].value * 0.15;
-					  if (math.Random() > .7) {
-						stockPercent *= -1;  
-					  }
-                	  return stockPercent;
+                	  return getRandBetween(-stockPercent, stockPercent);
                   }, function() {
-					  return 'The change was '+ this.delta;
+					  if (this.delta < 0) {
+						  return 'One of ' + this.stockName + '\'s key executives must resign due to health reasons. Stock price fell by ' + this.delta + '%.';
+					  }
+					  else if (this.delta > 0) {
+						  return this.stockName() + ' unveiled a new product for a rapidly growing market. Stock price rose by ' + this.delta + '%.';
+					  }
+					  else {
+						  return this.stockName() + ' announced they will sponsor PennApps in the fall of 2012. Wall Street is unsure how it will play out. Stock price remained the same.';
+					  }
 				  }, null),
-                  new event(function(name) {
-                	  name +' description goes here';
-                  }, function(name) {
-                	  var stockPercent = stocks[name].value * 0.1;
-                	  getRandBetween(-stockPercent, stockPercent);
-                  }, null),
-                  new event(function(name) {
-                	  name +' description goes here';
-                  }, function(name) {
-                	  var stockPercent = stocks[name].value * 0.1;
-                	  getRandBetween(-stockPercent, stockPercent);
-                  }, null),
-                  new event(function(name) {
-                	  name +' description goes here';
-                  }, function(name) {
-                	  var stockPercent = stocks[name].value * 0.1;
-                	  getRandBetween(-stockPercent, stockPercent);
-                  }, null),
+				  new event(function() {
+                	  return this.stockName() + '\'s largest competitor just went bankrupt. Generally, analysts see situations like this as an opportunity to gain market share. However, it may also be seen as a sign of a weak or struggling industry.';
+                  }, function() {
+                	  var stockPercent = stocks[this.stockName()].value * 0.1;
+                	  return getRandBetween(-stockPercent, stockPercent*1.5);
+                  }, function() {
+					  if (this.delta < 0) {
+						  return 'A large number of analysts think ' + this.stockName + 'may be the next to file for Chapter 11. Stock price fell by ' + this.delta + '%.';
+					  }
+					  else if (this.delta > 0) {
+						  return 'A large number of analysts think ' + this.stockName() + ' is strategically poised to capture market share from its bankrupt competitor. Stock price rose by ' + this.delta + '%.';
+					  }
+					  else {
+						  return 'Analysts\'s opinions were split evenly on the news. ' + this.stockName + '\'s stock price remained the same.';
+					  }
+				  }, null),
+				  new event(function() {
+                	  return 'Rumors have spread that ' + this.stockName + '\'s CFO cooked the books. If these allegations prove true, they could be devastating.';
+                  }, function() {
+                	  var stockPercent = stocks[this.stockName()].value * 0.1;
+                	  return getRandBetween(-stockPercent*2.5, stockPercent);
+                  }, function() {
+					  if (this.delta < 0) {
+						  return this.stockName + '\'s CFO was indicted by the SEC. Stock price fell by ' + this.delta + '%.';
+					  }
+					  else if (this.delta > 0) {
+						  return 'The rumors turned out to be false. ' + this.stockName() + '\'s stock price rose by ' + this.delta + '%.';
+					  }
+					  else {
+						  return 'The issue was dwarfed by an even larger scandal at Halliburton. ' + this.stockName + '\'s stock price remained the same.';
+					  }
+				  }, null),
+				  new event(function() {
+                	  return 'China\'s political leaders are meeting to determine monetary policy. ' + this.stockName + ' buys key supplies from China. If the Yuan strengethens, ' + this.stockName + ' will have to pay more to manufacture its products.';
+                  }, function() {
+                	  var stockPercent = stocks[this.stockName()].value * 0.1;
+                	  return getRandBetween(-stockPercent*2, stockPercent);
+                  }, function() {
+					  if (this.delta < 0) {
+						  return 'Due to U.S. pressure, China allowed its currency to partially elevate. ' + this.stockName + '\'s stock price fell by ' + this.delta + '%.';
+					  }
+					  else if (this.delta > 0) {
+						  return 'The Chinese government kept the Yuan pegged to the dollar. In response, ' + this.stockName() + '\'s stock price rose by ' + this.delta + '%.';
+					  }
+					  else {
+						  return 'The Chinese government maintained the current exchange rate, but indicated they\'d be willing to change it in the future. ' + this.stockName + '\'s stock price remained the same.';
+					  }
+				  }, null),
 ];
