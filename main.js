@@ -1,4 +1,4 @@
-var page = 0, money = 10000;
+var page = 0, currentTurn = 0, money = 10000;
 var stocks = {
 		'BEER': new stock('BEER', 20),
 		'BLUE': new stock('BLUE', 20),
@@ -25,19 +25,55 @@ $(document).ready(function() {
 	});
 	
 	$('#continue').submit(function(e) {
-		page++;
-		if (page == 3) {
-			page = 'congrats';
+		if (page == 'congrats') {
+			page = 'game';
+			$.get('index.html', function(data) {
+				$('#content').html($(data).find('#content'));
+				drawAmounts();
+			});
+			drawAmounts();
+			return false;
 		}
-		else if (page == 'congrats') {
-			return false; // TODO exit training
+		else if (page == 'game') {
+			currentTurn++;
+			turn();
+			drawAmounts();
+			if (currentTurn == 5) {
+				$.get('congrats.html', function(data) {
+					$('#content').html($(data).find('#content'));
+					drawAmounts();
+				});
+			}
+			return false;
 		}
-		$.get('training_'+ page +'.html', function(data) {
-			$('#content').html($(data).find('#content'));
-		});
+		else {
+			page++;
+			if (page == 4) {
+				page = 'congrats';
+			}
+			$.get('training_'+ page +'.html', function(data) {
+				$('#content').html($(data).find('#content'));
+				if (page == 2) {
+					$('#stock').append('<option value="LOVE">LOVE</option>');
+					$('#controlWrapper').show();
+				}
+				else if (page == 3) {
+					stocks.LOVE.changeValue(stocks.LOVE.value + 2);
+					$('#stock option[value="BEER"]').after('<option value="BUBL">BUBL</option>');
+				}
+				else if (page == 'congrats') {
+					stocks.BUBL.changeValue(stocks.BUBL.value + 1);
+					$('#stock option[value="BEER"]').after('<option value="BLUE">BLUE</option>');
+					$('#stock option[value="BUBL"]').after('<option value="DRUG">DRUG</option>');
+				}
+				drawAmounts();
+			});
+			return false;
+		}
 		e.preventDefault();
 	});
 	
+	$('#continue').submit();
 	stocks['BEER'].buy(money / stocks['BEER'].value);
 	drawAmounts();
 });
@@ -48,10 +84,10 @@ function stock(name, value) {
 	this.amount = 0;
 	this.name = name;
 	this.value = value;
-	this.allvalues = [value];
+	this.allValues = [value];
 	this.changeValue = function(newValue) {
 		this.allValues.push(newValue);
-		value = newValue;
+		this.value = newValue;
 	}
 	this.buy = function(amount) {
 		var cost = amount * this.value;
@@ -79,14 +115,20 @@ function stock(name, value) {
 function buy() {
 	var values = validate();
 	if (values) {
-		stocks[values.name].buy(values.amount);
+		var v = stocks[values.name].buy(values.amount);
+		if (v !== true) {
+			alert('You only have enough money to buy '+ v +' share'+ (v == 1 ? '' : 's') +'.');
+		}
 	}
 }
 
 function sell() {
 	var values = validate();
 	if (values) {
-		stocks[values.name].sell(values.amount);
+		var v = stocks[values.name].sell(values.amount);
+		if (v !== true) {
+			alert('You only have '+ v +' share'+ (v == 1 ? '' : 's') +' to sell.');
+		}
 	}
 }
 
@@ -115,7 +157,8 @@ function drawAmounts() {
 	var $tbody = $('#stocks tbody');
 	$tbody.empty();
 	for (name in stocks) {
-		$tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
+		if (stocks.hasOwnProperty(name))
+			$tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
 	}
 	$tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount"></td></tr>');
 }
@@ -134,6 +177,8 @@ Array.prototype.remove = function(item) {
 };
 
 Array.prototype.getRandomElement = function() {
+	if (this.length == 0)
+		return undefined;
 	var i = getRandBetween(0, this.length-1);
 	return this[i];
 }
