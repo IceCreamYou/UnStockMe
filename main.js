@@ -148,3 +148,4 @@ function calcNewPrices() {
 		stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));	
 	}
 }
+//TEST COMMENT
