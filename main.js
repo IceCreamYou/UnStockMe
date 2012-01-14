@@ -6,6 +6,7 @@ var stocks = {
 		'DRUG': new stock('DRUG', 20),
 		'LOVE': new stock('LOVE', 20),
 };
+var turnEvent;
 
 $(document).ready(function() {
 	$('td.cash + td').html(money);
@@ -137,12 +138,20 @@ Array.prototype.getRandomElement = function() {
 	return this[i];
 }
 
-function turn() {
-	calcNewPrices();
-	display();	
+
+// POST-TRAINING --------------------------------------------------------------
+
+function event(description) {
+	this.description = description;
+	this.stockName = 'BEER';
+	this.getDelta = function() {};
 }
 
-function calcNewPrices() {
+function turn() {
+	calculateNewPrices();
+}
+
+function calculateNewPrices() {
 	for (stock in stocks) {
 		var stockValue = stocks[stock].value;
 		stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));	
