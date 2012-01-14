@@ -51,6 +51,7 @@ $(document).ready(function() {
 	});
 	
 	$('#continue').submit(function(e) {
+		e.preventDefault();
 		if (page == 'congrats') {
 			page = 'game';
 			$.get('index.html', function(data) {
@@ -97,7 +98,6 @@ $(document).ready(function() {
 			});
 			return false;
 		}
-		e.preventDefault();
 	});
 	
 	$('#continue').submit();
@@ -242,6 +242,8 @@ function event(description, delta, note, stockName) {
 
 function turn() {
 	calculateNewPrices();
+	if (turnEvent)
+		$('.note').html(turnEvent.note());
 	turnEvent = eventTypes.getRandomElement();
 	$('.info').html(turnEvent.description());
 	drawAmounts();
