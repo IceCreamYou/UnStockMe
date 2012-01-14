@@ -271,10 +271,10 @@ var eventTypes = [
                 	  return getRandBetween(-stockPercent*.5, stockPercent*1.5);
                   }, function() {
 					  if (this.delta < 0) {
-						  return this.stockName() + ' missed their earnings predictions. Stock price fell by ' + this.delta + '%.';
+						  return this.stockName() + ' missed their earnings predictions. Stock price fell by $' + this.delta + '.';
 					  }
 					  else if (this.delta > 0) {
-						  return this.stockName() + ' exceeded their earnings predictions. Stock price rose by ' + this.delta + '%.';
+						  return this.stockName() + ' exceeded their earnings predictions. Stock price rose by $' + this.delta + '.';
 					  }
 					  else {
 						  return this.stockName() + ' exactly hit their earnings predictions. Stock price remained the same.';
@@ -287,10 +287,10 @@ var eventTypes = [
                 	  return getRandBetween(-stockPercent, stockPercent);
                   }, function() {
 					  if (this.delta < 0) {
-						  return 'One of ' + this.stockName() + '\'s key executives must resign due to health reasons. Stock price fell by ' + this.delta + '%.';
+						  return 'One of ' + this.stockName() + '\'s key executives must resign due to health reasons. Stock price fell by $' + this.delta + '.';
 					  }
 					  else if (this.delta > 0) {
-						  return this.stockName() + ' unveiled a new product for a rapidly growing market. Stock price rose by ' + this.delta + '%.';
+						  return this.stockName() + ' unveiled a new product for a rapidly growing market. Stock price rose by $' + this.delta + '.';
 					  }
 					  else {
 						  return this.stockName() + ' announced they will sponsor PennApps in the fall of 2012. Wall Street is unsure how it will play out. Stock price remained the same.';
@@ -303,10 +303,10 @@ var eventTypes = [
                 	  return getRandBetween(-stockPercent, stockPercent*1.5);
                   }, function() {
 					  if (this.delta < 0) {
-						  return 'A large number of analysts think ' + this.stockName() + 'may be the next to file for Chapter 11. Stock price fell by ' + this.delta + '%.';
+						  return 'A large number of analysts think ' + this.stockName() + 'may be the next to file for Chapter 11. Stock price fell by $' + this.delta + '.';
 					  }
 					  else if (this.delta > 0) {
-						  return 'A large number of analysts think ' + this.stockName() + ' is strategically poised to capture market share from its bankrupt competitor. Stock price rose by ' + this.delta + '%.';
+						  return 'A large number of analysts think ' + this.stockName() + ' is strategically poised to capture market share from its bankrupt competitor. Stock price rose by $' + this.delta + '.';
 					  }
 					  else {
 						  return 'Analysts\'s opinions were split evenly on the news. ' + this.stockName() + '\'s stock price remained the same.';
@@ -319,10 +319,10 @@ var eventTypes = [
                 	  return getRandBetween(-stockPercent*2.5, stockPercent);
                   }, function() {
 					  if (this.delta < 0) {
-						  return this.stockName() + '\'s CFO was indicted by the SEC. Stock price fell by ' + this.delta + '%.';
+						  return this.stockName() + '\'s CFO was indicted by the SEC. Stock price fell by $' + this.delta + '.';
 					  }
 					  else if (this.delta > 0) {
-						  return 'The rumors turned out to be false. ' + this.stockName() + '\'s stock price rose by ' + this.delta + '%.';
+						  return 'The rumors turned out to be false. ' + this.stockName() + '\'s stock price rose by $' + this.delta + '.';
 					  }
 					  else {
 						  return 'The issue was dwarfed by an even larger scandal at Halliburton. ' + this.stockName() + '\'s stock price remained the same.';
@@ -335,10 +335,10 @@ var eventTypes = [
                 	  return getRandBetween(-stockPercent*2, stockPercent);
                   }, function() {
 					  if (this.delta < 0) {
-						  return 'Due to U.S. pressure, China allowed its currency to partially elevate. ' + this.stockName() + '\'s stock price fell by ' + this.delta + '%.';
+						  return 'Due to U.S. pressure, China allowed its currency to partially elevate. ' + this.stockName() + '\'s stock price fell by $' + this.delta + '.';
 					  }
 					  else if (this.delta > 0) {
-						  return 'The Chinese government kept the Yuan pegged to the dollar. In response, ' + this.stockName() + '\'s stock price rose by ' + this.delta + '%.';
+						  return 'The Chinese government kept the Yuan pegged to the dollar. In response, ' + this.stockName() + '\'s stock price rose by $' + this.delta + '.';
 					  }
 					  else {
 						  return 'The Chinese government maintained the current exchange rate, but indicated they\'d be willing to change it in the future. ' + this.stockName() + '\'s stock price remained the same.';
