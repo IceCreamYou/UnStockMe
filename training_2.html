@@ -1,33 +1,78 @@
-<!DOCTYPE html>
-
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Training Page 2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UnStock Me</title>
+    <meta name="keywords" content="stock,market,game,trade" />
+    <meta name="description" content="Learn how to trade on the stock market with a simple game." />
+    <!--<link rel="shortcut icon" href="icon.png" type="image/x-icon" />-->
+    <link type="text/css" rel="stylesheet" media="all" href="styles.css" />
+    <script type="text/javascript" src="jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </head>
-
 <body>
-<p class="info">
-    You found a note on Grandpa's dresser saying that LOVE is undervalued by $3.
-    You can sell some BEER to buy LOVE.
-    What do you want to do?
-</p>
-
-<table border = "1" class="stocks">
-    <tr>
-        <td> STOCK </td>
-        <td> PRICE </td>
-    </tr>
-    <tr>
-        <td> BEER </td>
-        <td> 10.00 </td>
-    </tr>
-    <tr>
-        <td> LOVE </td>
-        <td> 12.00 </td>
-    </tr>
-    <tr>
-        <td> CASH </td>
-        <td> 0 </td>
-    </tr>
+    <div id="main">
+<<<<<<< HEAD
+      <noscript>You must have JavaScript enabled to play this game.</noscript>
+      Some stuff goes here.
+=======
+      <div id="content">
+        <div id="left-column">
+          <noscript>You must have JavaScript enabled to play this game.</noscript>
+          <p class="note">This is information about the outcome of the previous decision.</p>
+          <p class="info">
+            You found a note on Grandpa's dresser saying that LOVE is undervalued by $3.<br> You can sell some BEER to buy LOVE. <br>What do you want to do?
+          </p>
+        </div>
+        <div id="right-column">
+          <table id="stocks">
+            <tbody>
+              <tr>
+                <td class="stock">BEER</td><td class="value">15</td>
+              </tr>
+              <tr>
+                <td class="stock">LOVE</td><td class="value">12</td>
+              </tr>
+              <tr>
+                <td class="stock cash">Cash</td><td class="value">0</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="terms">
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+      </div><!-- /content -->
+      <div id="controlWrapper">
+      <form id="controls" action="index.html">
+        <label>Amount
+          <input type="text" id="amount" maxlength="11" size="11" name="amount" />
+        </label>
+        <label>Stock
+          <select id="stock" name="stock">
+            <option value="BEER" selected="selected">BEER</option>
+          </select>
+        </label>
+        <div id="actions">
+          <input type="submit" id="buy" name="buy" value="Buy" />
+          <input type="submit" id="sell" name="sell" value="Sell" />
+        </div>
+      </form><!-- /controls -->
+      <div style="clear: both;"></div>
+      </div>
+      <form id="continue" action="index.html">
+        <input type="submit" id="next" name="next" value="Continue &raquo;" />
+        <div style="clear: both;"></div>
+      </form><!-- /continue -->
+>>>>>>> 9e8a183... Final stylistic changes
+    </div><!-- /main -->
+    <div id="footer">
+      <p>This game was built by <a href="http://www.isaacsukin.com/">Isaac Sukin</a>,
+      Casey Rosengren, and Ashu Goel.</p>
+    </div>
 </body>
 </html>

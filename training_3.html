@@ -1,49 +1,79 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UnStock Me</title>
+    <meta name="keywords" content="stock,market,game,trade" />
+    <meta name="description" content="Learn how to trade on the stock market with a simple game." />
+    <!--<link rel="shortcut icon" href="icon.png" type="image/x-icon" />-->
+    <link type="text/css" rel="stylesheet" media="all" href="styles.css" />
+    <script type="text/javascript" src="jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </head>
-
 <body>
-<p class="note">
-	LOVE went up $1.50.
-</p>
-<p class="info">
-	BUBL's IPO was today. Their introductory price is $20/share and they are selling whizgizmos - is a hot new tech product. What do you want to do?
-</p>
-<table border = "1" class="stocks">
-    <tr>
-        <td> STOCK </td>
-        <td> PRICE </td>
-    </tr>
-    <tr>
-        <td> BEER </td>
-        <td> 10.00 </td>
-    </tr>
-    <tr>
-        <td> LOVE </td>
-        <td> 13.50 </td>
-    </tr>
-    <tr>
-        <td> BUBL </td>
-        <td> 20.00 </td>
-    </tr>
-    <tr>
-        <td> CASH </td>
-        <td> 0 </td>
-    </tr>
-</table>
-<br />
-<table border = "1" class="terms">
-	<tr>
-    	<td> Terms </td>
-    </tr>
-    <tr>
-    	<td> IPO </td>
-        <td>An initial public offering (IPO) or stock market launch, is the first sale of stock by a private company to the public. It can be used by either small or large companies to raise expansion capital and become publicly traded enterprises. 						
-        </td>
-    </tr>
-</table>
+    <div id="main">
+<<<<<<< HEAD
+      <noscript>You must have JavaScript enabled to play this game.</noscript>
+      Some stuff goes here.
+=======
+      <div id="content">
+        <div id="left-column">
+          <noscript>You must have JavaScript enabled to play this game.</noscript>
+          <p class="note">LOVE went up $1.50.</p>
+          <p class="info">
+           BUBL's IPO was today. Their introductory price is $20/share and they are selling whizgizmos - is a hot new tech product. What do you want to do?
+          </p>
+        </div>
+        <div id="right-column">
+          <table id="stocks">
+            <tbody>
+              <tr>
+                <td class="stock">BEER</td><td class="value">15</td>
+              </tr>
+              <tr>
+                <td class="stock">LOVE</td><td class="value">13.50</td>
+              </tr>
+              <tr>
+                <td class="stock">BUBL</td><td class="value">20</td>
+              </tr>
+              <tr>
+                <td class="stock cash">Cash</td><td class="value">0</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="terms">
+            <p><span class="term">IPO</span> <span class="definition">An initial public offering (IPO) or stock market launch, is the first sale of stock by a private company to the public. It can be used by either small or large companies to raise expansion capital and become publicly traded enterprises.</span></p>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+      </div><!-- /content -->
+      <div id="controlWrapper">
+      <form id="controls" action="index.html">
+        <label>Amount
+          <input type="text" id="amount" maxlength="11" size="11" name="amount" />
+        </label>
+        <label>Stock
+          <select id="stock" name="stock">
+            <option value="BEER" selected="selected">BEER</option>
+          </select>
+        </label>
+        <div id="actions">
+          <input type="submit" id="buy" name="buy" value="Buy" />
+          <input type="submit" id="sell" name="sell" value="Sell" />
+        </div>
+      </form><!-- /controls -->
+      <div style="clear: both;"></div>
+      </div>
+      <form id="continue" action="index.html">
+        <input type="submit" id="next" name="next" value="Continue &raquo;" />
+        <div style="clear: both;"></div>
+      </form><!-- /continue -->
+>>>>>>> 9e8a183... Final stylistic changes
+    </div><!-- /main -->
+    <div id="footer">
+      <p>This game was built by <a href="http://www.isaacsukin.com/">Isaac Sukin</a>,
+      Casey Rosengren, and Ashu Goel.</p>
+    </div>
 </body>
 </html>

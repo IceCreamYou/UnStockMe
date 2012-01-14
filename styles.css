@@ -44,9 +44,150 @@ li {
   list-style-position: inside;
 }
 
+<<<<<<< HEAD
+=======
+/* Structure */
+
+#header {
+  border: 1px dotted lightGray;
+  margin: 0 auto 30px auto;
+  padding-bottom: 10px;
+  width: 960px;
+}
+
+.description {
+  color: #777777;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+table {
+  width: 100%;
+}
+
+#main {
+  margin: 0 auto;
+  width: 960px;
+}
+
+#left-column {
+  float: left;
+  padding-right: 20px;
+  width: 700px;
+}
+
+#right-column {
+  float: right;
+  width: 240px;
+}
+
+#controlWrapper {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  margin-top: 20px;
+  padding: 15px;
+  width: 700px;
+  /* display: none; */
+}
+
+#continue {
+  margin-top: 20px;
+  padding: 15px;
+  width: 700px;
+}
+
+#continue input {
+  background: none repeat scroll 0 0 #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 1px 1px 0;
+  float: right;
+  font-size: 20px;
+  padding: 5px 20px;
+}
+
+#controls > * {
+  float: left;
+  margin-right: 15px;
+}
+
+label select,
+label input {
+  display: block;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+>>>>>>> 9e8a183... Final stylistic changes
 #footer {
   border: 1px dotted lightGray;
   margin-top: 30px;
   padding-top: 10px;
   text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+#footer p {
+  color: #777777;
+  font-size: 16px;
+}
+
+/* Specific styles */
+
+#right-column table,
+#right-column div {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.note {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #777777;
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0;
+  padding: 15px;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+.term,
+.stock {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.definition,
+.value {
+  color: #777777;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+#terms p {
+  padding: 2.5px 0;
+}
+
+.cash {
+  color: green;
+}
+
+.value:before {
+  content: "$";
+}
+
+#actions {
+  display: inline;
+  margin-top: 1em;
+}
+>>>>>>> 9e8a183... Final stylistic changes
