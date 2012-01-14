@@ -1,3 +1,27 @@
+/**
+ *
+display the delta for each stock
+display a notice that the trade was successful
+display total portfolio value
+style # shares like price in table
+only show stocks in the table that we've introduced so far
+display note explaining what happened as a result of the last turn
+don't let events repeat
+highlight terms in info
+come up with more terms
+introduce more trading concepts
+introduce stock personalities
+
+
+
+
+You enter a lab. Professor Oak is standing over a table. There are two stocks on a table: BEER and LOVE. Your cousin Gary has been here already and taken DRUG, the third stock. Which stock do you want to take?
+
+You encountered wild LOVE. LOVE wants to fight! BEER used confusion! BLUE used dividend! BLUE used transform! BLUE is now RED! DRUG used depression! BUBL used ponzi scheme! LOVE used split!
+
+Gary is challenging your portfolio to a fight! Gary uses insider information! His stock prices go up 10%! BUBL used disruptive technology! Gary's stock is now obsolete! Critical hit! Gary counters by lobbying congress to pass SOPA! Booo, Gary.
+ */
+
 var page = 0, currentTurn = 0, money = 10000;
 var stocks = {
 		'BEER': new stock('BEER', 20),
