@@ -12,6 +12,7 @@ come up with more terms
 introduce more trading concepts
 introduce stock personalities
 get rid of excess whitespace above control box
+elaborate game over page
 
 
 
