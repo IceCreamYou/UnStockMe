@@ -301,7 +301,7 @@ var eventTypes = [
 					  }
 				  }, null),
 				  new event(function() {
-                	  return 'China\'s political leaders are meeting to determine monetary policy. ' + this.stockName() + ' buys key supplies from China. If the Yuan strengethens, ' + this.stockName + ' will have to pay more to manufacture its products.';
+                	  return 'China\'s political leaders are meeting to determine monetary policy. ' + this.stockName() + ' buys key supplies from China. If the Yuan strengethens, ' + this.stockName() + ' will have to pay more to manufacture its products.';
                   }, function() {
                 	  var stockPercent = stocks[this.stockName()].value * 0.1;
                 	  return getRandBetween(-stockPercent*2, stockPercent);
