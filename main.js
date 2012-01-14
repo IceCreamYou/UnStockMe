@@ -226,10 +226,10 @@ function event(description, delta, note, stockName) {
 	this.description = description;
 	this.origStockName = stockName;
 	this.stockName = function() {
-		if (this.origStockName) {
-			return this.origStockName;
+		if (!this.origStockName) {
+			this.origStockName = stocks.keys().getRandomElement();
 		}
-		return stocks.keys().getRandomElement();
+		return this.origStockName;
 	};
 	this.deltaFunc = delta;
 	this.delta = 0;
