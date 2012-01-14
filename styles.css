@@ -75,8 +75,27 @@ table {
 
 #controlWrapper {
   background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  margin-top: 20px;
+  padding: 15px;
   width: 700px;
   /* display: none; */
+}
+
+#continue {
+  margin-top: 20px;
+  padding: 15px;
+  width: 700px;
+}
+
+#continue input {
+  background: none repeat scroll 0 0 #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 1px 1px 0;
+  float: right;
+  font-size: 20px;
+  padding: 5px 20px;
 }
 
 #controls > * {
@@ -128,6 +147,32 @@ label {
 
 .info {
   margin-top: 20px;
+}
+
+.term,
+.stock {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.definition,
+.value {
+  color: #777777;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+#terms p {
+  padding: 2.5px 0;
+}
+
+.cash {
+  color: green;
+}
+
+.value:before {
+  content: "$";
 }
 
 #actions {
