@@ -1,4 +1,4 @@
-var page = 0, money = 10000;
+var page = 0, turn = 0, money = 10000;
 var stocks = {
 		'BEER': new stock('BEER', 20),
 		'BLUE': new stock('BLUE', 20),
@@ -25,17 +25,34 @@ $(document).ready(function() {
 	});
 	
 	$('#continue').submit(function(e) {
-		page++;
-		if (page == 3) {
-			page = 'congrats';
+		if (page == 'congrats') {
+			page = 'game';
+			$.get('index.html', function(data) {
+				$('#content').html($(data).find('#content'));
+			});
+			drawAmounts();
+			return false;
 		}
-		else if (page == 'congrats') {
-			return false; // TODO exit training
+		else if (page == 'game') {
+			turn++;
+			turn();
+			if (turn == 5) {
+				$.get('congrats.html', function(data) {
+					$('#content').html($(data).find('#content'));
+				});
+			}
+			return false;
 		}
-		$.get('training_'+ page +'.html', function(data) {
-			$('#content').html($(data).find('#content'));
-		});
-		e.preventDefault();
+		else {
+			page++;
+			if (page == 4) {
+				page = 'congrats';
+			}
+			$.get('training_'+ page +'.html', function(data) {
+				$('#content').html($(data).find('#content'));
+			});
+			return false;
+		}
 	});
 	
 	stocks['BEER'].buy(money / stocks['BEER'].value);
@@ -115,7 +132,8 @@ function drawAmounts() {
 	var $tbody = $('#stocks tbody');
 	$tbody.empty();
 	for (name in stocks) {
-		$tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
+		if (stocks.hasOwnProperty(name))
+			$tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
 	}
 	$tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount"></td></tr>');
 }

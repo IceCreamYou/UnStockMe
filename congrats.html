@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UnStock Me</title>
+    <meta name="keywords" content="stock,market,game,trade" />
+    <meta name="description" content="Learn how to trade on the stock market with a simple game." />
+    <!--<link rel="shortcut icon" href="icon.png" type="image/x-icon" />-->
+    <link type="text/css" rel="stylesheet" media="all" href="styles.css" />
+    <script type="text/javascript" src="jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+    <div id="header">
+      <!--<img src="logo.png" alt="UnStock Me" />-->
+      <h1>UnStock Me</h1>
+      <p class="description">A stock trading game</p>
+    </div>
+    <div id="main">
+      <div id="content">
+        <div id="left-column">
+          <noscript>You must have JavaScript enabled to play this game.</noscript>
+          <p class="note">&nbsp;</p>
+          <p class="info">
+            Game over!
+          </p>
+        </div>
+        <div id="right-column">
+          <table id="stocks">
+            <thead>
+              <tr>
+                <td>Stock</td><td>Price</td><td>Shares</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="stock">BEER</td><td class="value">15</td><td class="amount"></td>
+              </tr>
+              <tr>
+                <td class="stock cash">Cash</td><td class="value">0</td><td class="amount"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="terms">
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+            <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+      </div><!-- /content -->
+      <div id="controlWrapper">
+      <form id="controls" action="index.html">
+        <label>Amount
+          <input type="text" id="amount" maxlength="11" size="11" name="amount" />
+        </label>
+        <label>Stock
+          <select id="stock" name="stock">
+            <option value="BEER" selected="selected">BEER</option>
+          </select>
+        </label>
+        <div id="actions">
+          <input type="submit" id="buy" name="buy" value="Buy" />
+          <input type="submit" id="sell" name="sell" value="Sell" />
+        </div>
+      </form><!-- /controls -->
+      <div style="clear: both;"></div>
+      </div>
+      <form id="continue" action="training_1.html">
+        <input type="submit" id="next" name="next" value="Continue &raquo;" />
+        <div style="clear: both;"></div>
+      </form><!-- /continue -->
+    </div><!-- /main -->
+    <div id="footer">
+      <p>This game was built by <a href="http://www.isaacsukin.com/">Isaac Sukin</a>,
+      Casey Rosengren, and Ashu Goel.</p>
+    </div>
+</body>
+</html>
