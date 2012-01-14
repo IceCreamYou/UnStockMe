@@ -13,8 +13,35 @@
 </head>
 <body>
     <div id="main">
-      <noscript>You must have JavaScript enabled to play this game.</noscript>
-      Some stuff goes here.
+      <div id="content">
+        <p>You must have JavaScript enabled to play this game.</p>
+        <p class="note">This is information about the outcome of the previous decision.</p>
+        <p class="info">This is information about the decision you're about to make.</p>
+        <table id="stocks">
+          <tbody>
+            <tr>
+              <td class="stock">BEER</td><td class="value">15</td>
+              <td class="stock cash">Cash</td><td class="value">0</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="terms">
+          <p><span class="term">IPO</span> <span class="definition">Initial Public Offering</span></p>
+        </div>
+      </div><!-- /content -->
+      <form id="controls" action="index.html">
+        <input type="text" id="amount" maxlength="11" size="11" name="amount" />
+        <select id="stock" name="stock">
+          <option value="BEER" selected="selected">BEER</option>
+        </select>
+        <div id="actions">
+          <input type="submit" id="buy" name="buy" />
+          <input type="submit" id="sell" name="sell" />
+        </div>
+      </form><!-- /controls -->
+      <form id="continue" action="index.html">
+        <input type="submit" id="next" name="next" />
+      </form><!-- /continue -->
     </div><!-- /main -->
     <div id="footer">
       <p>This game was built by <a href="http://www.isaacsukin.com/">Isaac Sukin</a>,

@@ -1,6 +1,22 @@
 $(document).ready(function() {
-  alert('Hello, world!');
+	var submitButton = null;
+	$('#controls').hide().submit(function(e) {
+		e.preventDefault();
+	}).on('keyup mouseup', function(e) {
+		submitButton = e.target.name;
+	});
 });
+
+// STOCKS ---------------------------------------------------------------------
+
+var stock = function() {
+	this.amount = 0;
+	this.value = 10;
+	this.pastValues = [];
+}
+
+
+// UTILITIES ------------------------------------------------------------------
 
 function getRandBetween(lo, hi) {
 	return parseInt(Math.floor(Math.random()*(hi-lo+1))+lo);
