@@ -4,7 +4,7 @@
 
 body, h1, h2, h3, h4, div, ul, p, pre {
   color: black;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 24px;
   padding: 0;
   margin: 0;
@@ -15,6 +15,7 @@ h1 {
   font-weight: bold;
   line-height: 40px;
   margin: 20px 0 10px;
+  padding-left: 15px;
 }
 
 h2 {
@@ -22,13 +23,6 @@ h2 {
   font-weight: bold;
   line-height: 32px;
   margin: 15px 0 10px;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 24px;
-  margin: 10px 0 5px;
 }
 
 pre {
@@ -44,9 +38,99 @@ li {
   list-style-position: inside;
 }
 
+/* Structure */
+
+#header {
+  border: 1px dotted lightGray;
+  margin: 0 auto 30px auto;
+  padding-bottom: 10px;
+  width: 960px;
+}
+
+.description {
+  color: #777777;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+table {
+  width: 100%;
+}
+
+#main {
+  margin: 0 auto;
+  width: 960px;
+}
+
+#left-column {
+  float: left;
+  padding-right: 20px;
+  width: 700px;
+}
+
+#right-column {
+  float: right;
+  width: 240px;
+}
+
+#controlWrapper {
+  background-color: #EEEEEE;
+  width: 700px;
+  /* display: none; */
+}
+
+#controls > * {
+  float: left;
+  margin-right: 15px;
+}
+
+label select,
+label input {
+  display: block;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 #footer {
   border: 1px dotted lightGray;
   margin-top: 30px;
   padding-top: 10px;
   text-align: center;
+}
+
+#footer p {
+  color: #777777;
+  font-size: 16px;
+}
+
+/* Specific styles */
+
+#right-column table,
+#right-column div {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.note {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #777777;
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0;
+  padding: 15px;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+#actions {
+  display: inline;
+  margin-top: 1em;
 }
