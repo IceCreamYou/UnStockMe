@@ -42,6 +42,7 @@ $(document).ready(function() {
 				$.get('congrats.html', function(data) {
 					$('#content').html($(data).find('#content'));
 					drawAmounts();
+					$('#controlWrapper, #continue').hide();
 				});
 			}
 			return false;
@@ -222,12 +223,14 @@ function turn() {
 
 function calculateNewPrices() {
 	for (stock in stocks) {
-		var stockValue = stocks[stock].value;
-		if (turnEvent && stock == turnEvent.stockName()) {
-			stocks[stock].changeValue(stockValue + turnEvent.getDelta());	
-		}
-		else {
-			stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));
+		if (stocks.hasOwnProperty(stock)) {
+			var stockValue = stocks[stock].value;
+			if (turnEvent && stock == turnEvent.stockName()) {
+				stocks[stock].changeValue(stockValue + turnEvent.getDelta());	
+			}
+			else {
+				stocks[stock].changeValue(stockValue + getRandBetween(-.1*stockValue, .1*stockValue));
+			}
 		}
 	}
 }
