@@ -5,7 +5,6 @@ display a notice that the trade was successful
 display total portfolio value
 style # shares like price in table
 only show stocks in the table that we've introduced so far
-display note explaining what happened as a result of the last turn
 don't let events repeat
 highlight terms in info
 come up with more terms
@@ -146,6 +145,9 @@ function buy() {
 		if (v !== true) {
 			alert('You only have enough money to buy '+ v +' share'+ (v == 1 ? '' : 's') +'.');
 		}
+		else {
+			setMessage('You bought '+ values.amount +' shares of '+ values.name +' for $'+ stocks[values.name].value +'/share', true);
+		}
 	}
 }
 
@@ -155,6 +157,9 @@ function sell() {
 		var v = stocks[values.name].sell(values.amount);
 		if (v !== true) {
 			alert('You only have '+ v +' share'+ (v == 1 ? '' : 's') +' to sell.');
+		}
+		else {
+			setMessage('You sold '+ values.amount +' shares of '+ values.name +' for $'+ stocks[values.name].value +'/share', true);
 		}
 	}
 }
@@ -192,6 +197,18 @@ function drawAmounts() {
 
 
 // UTILITIES ------------------------------------------------------------------
+
+var messageFadeTimerA = null, messageFadeTimerB = null;
+function setMessage(text, fade) {
+	clearTimeout(messageFadeTimerA);
+	clearTimeout(messageFadeTimerB);
+	$('#messages').html(text).css('opacity', '1');
+	if (fade) {
+		// Fade out in 2 seconds after 5 seconds, then clear the text and set back to visible.
+		messageFadeTimerA = setTimeout("$('#messages').animate({'opacity': '0'}, 2000);", 5000);
+		messageFadeTimerB = setTimeout("$('#messages').html('').css('opacity', '1');", 7250);
+	}
+}
 
 function getRandBetween(lo, hi) {
 	return parseInt(Math.floor(Math.random()*(hi-lo+1))+lo);
