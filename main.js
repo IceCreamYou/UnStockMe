@@ -1,15 +1,15 @@
 /**
  *
 display the delta for each stock
-display total portfolio value
-style # shares like price in table
+
+GIVEN ENOUGH TIME: BUGS:
 only show stocks in the table that we've introduced so far
-highlight terms in info
+get rid of excess whitespace above control box
+
+GIVEN ENOUGH TIME: FEATURES:
 come up with more terms
 introduce more trading concepts
 introduce stock personalities
-get rid of excess whitespace above control box
-elaborate game over page
  */
 
 var page = 0, currentTurn = 0, money = 10000;
@@ -183,11 +183,25 @@ function validate() {
 function drawAmounts() {
     var $tbody = $('#stocks tbody');
     $tbody.empty();
+    var totalVal = money;
     for (name in stocks) {
-        if (stocks.hasOwnProperty(name))
+        if (stocks.hasOwnProperty(name)) {
+        	totalVal += stocks[name].value * stocks[name].amount;
             $tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
+        }
     }
-    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount"></td></tr>');
+    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td></tr>');
+    $tbody.append('<tr><td colspan="3" class="totalval"><strong>Total portfolio value:</strong> $'+ totalVal +'</td></tr>');
+
+    // Highlight terms when you mouse over them.
+    $('.info-term').hover(function() {
+      var $t = $(this);
+      $.each($('.term'), function() {
+        if ($t.html() == $(this).html()) {
+          $(this).toggleClass('highlight');
+        }
+      });
+    });
 }
 
 
@@ -372,8 +386,13 @@ function seriousBusiness() {
                 'Your cousin Gary has been here already and taken DRUG, the third stock. '+
                 'Which stock do you want to take?'
         );
+        $('#controls').show().html('<label>Stock<select id="stock" name="stock">'+
+        		'<option value="BEER" selected="selected">BEER</option>'+
+        		'<option value="LOVE">LOVE</option></select></label>'
+        );
     }
     else if (sbCount == 2) {
+    	sbStock = $('#stock').val();
         $('.info').html('Good choice. You take 5 shares of '+ sbStock +' and venture into the wild. '+
                 '"Be careful," Professor Oak warns, "it\'s a blue-chip world out there."'
         );
@@ -404,6 +423,7 @@ function seriousBusiness() {
                 'You\'ve earned the right to continue on your way to a life of tricking people into giving you their money. '+
                 'Good work!'
         );
+        $('#continue').hide();
     }
 }
 

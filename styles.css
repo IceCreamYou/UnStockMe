@@ -185,7 +185,8 @@ label {
 }
 
 .definition,
-.value {
+.value,
+.amount {
   color: #777777;
   font-size: 16px;
   line-height: 16px;
@@ -195,8 +196,17 @@ label {
   padding: 2.5px 0;
 }
 
+.info-term {
+  border-bottom: 1px dashed #777777;
+}
+
+.info-term:hover {
+  background-color: #EEEEEE;
+}
+
 .cash {
   color: green;
+  padding-bottom: 5px;
 }
 
 .value:before {
@@ -219,4 +229,14 @@ label {
   height: 20px;
   margin-top: 1em;
   padding: 5px 0;
+}
+
+.term.highlight {
+  color: green;
+}
+
+.totalval {
+  border-top: 1px solid #CCCCCC;
+  font-size: 18px;
+  padding-top: 5px;
 }
