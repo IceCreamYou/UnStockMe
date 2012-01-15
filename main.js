@@ -52,7 +52,7 @@ $(document).ready(function() {
         }
         else if (page == 'game') {
             currentTurn++;
-            if (currentTurn == 3) {
+            if (currentTurn == 5) {
                 $.get('congrats.html', function(data) {
                     $('#content').html($(data).find('#content'));
                     $('#controlWrapper').hide();
@@ -76,24 +76,30 @@ $(document).ready(function() {
             page++;
             if (page == 4) {
                 page = 'congrats';
+                resetChange();
             }
             $.get('training_'+ page +'.html', function(data) {
                 $('#content').html($(data).find('#content'));
-                if (page == 2) {
+                if (page == 1) {
+                	drawAmounts();
+                }
+                else if (page == 2) {
                     $('#stock').append('<option value="LOVE">LOVE</option>');
                     $('#controlWrapper').show();
+                    drawAmounts();
                 }
                 else if (page == 3) {
                     stocks.LOVE.changeValue(stocks.LOVE.value + 2);
                     $('#stock option[value="BEER"]').after('<option value="BUBL">BUBL</option>');
+                    drawAmounts();
                 }
                 else if (page == 'congrats') {
                 	resetChange();
                     stocks.BUBL.changeValue(stocks.BUBL.value + 1);
                     $('#stock option[value="BEER"]').after('<option value="BLUE">BLUE</option>');
                     $('#stock option[value="BUBL"]').after('<option value="DRUG">DRUG</option>');
+                    drawAmounts();
                 }
-                drawAmounts();
             });
             return false;
         }
@@ -196,7 +202,7 @@ function drawAmounts() {
         	var dollarChange = stocks[name].value - stocks[name].allValues[stocks[name].allValues.length-2];
         	if (!dollarChange)
         		dollarChange = 0;
-            $tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td><td class="change">' + dollarChange + '</td></tr>');
+            $tbody.append('<tr class="tr' + name + '"><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td><td class="change">' + dollarChange + '</td></tr>');
         }
     }
     $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td></tr>');
@@ -211,6 +217,11 @@ function drawAmounts() {
         }
       });
     });
+    //hide stocks for training
+    if (page == 1) hideStock('LOVE', 'DRUG', 'BUBL', 'BLUE');
+    if (page == 2) hideStock('DRUG', 'BUBL', 'BLUE');
+    if (page == 3) hideStock('DRUG', 'BLUE');
+    if (page == 4) hideStock('DRUG', 'BLUE');
 }
 
 function resetChange() {
@@ -220,6 +231,18 @@ function resetChange() {
 	            stocks[stock].allValues.push(stockValue);
 	        }
 	 }
+}
+
+function hideStock() {
+	for (var i = 0; i < arguments.length; i++) {
+		var name = arguments[i];
+		$.each($('#stocks tr'), function() {
+			var oname = $(this).find('.stock').html();
+			if (name == oname) {
+				$(this).hide();
+			}
+		});
+	}
 }
 
 
