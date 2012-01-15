@@ -51,8 +51,6 @@ $(document).ready(function() {
         }
         else if (page == 'game') {
             currentTurn++;
-            turn();
-            drawAmounts();
             if (currentTurn == 3) {
                 $.get('congrats.html', function(data) {
                     $('#content').html($(data).find('#content'));
@@ -60,6 +58,10 @@ $(document).ready(function() {
                     drawAmounts();
                 });
                 page = 'seriousBusiness';
+            }
+            else {
+                turn();
+                drawAmounts();
             }
             return false;
         }
@@ -236,10 +238,10 @@ Array.prototype.getRandomElement = function() {
     return this[i];
 }
 
-Object.prototype.keys = function(){
+function keys(obj){
     var keys = [];
-    for (var key in this) {
-        if (this.hasOwnProperty(key))
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key))
             keys.push(key);
     }
     return keys;
@@ -253,7 +255,7 @@ function event(description, delta, note, stockName) {
     this.origStockName = stockName;
     this.stockName = function() {
         if (!this.origStockName) {
-            this.origStockName = stocks.keys().getRandomElement();
+            this.origStockName = keys(stocks).getRandomElement();
         }
         return this.origStockName;
     };
@@ -381,29 +383,29 @@ var sbStock = 'BEER';
 function seriousBusiness() {
     sbCount++;
     if (sbCount == 1) {
+    	$('#right-column').hide();
+    	$('#left-column').css({'width': '960px', 'padding-right': '0'});
         $('.info').html('You enter a lab. Professor Oak is standing over a table. '+
                 'There are two stocks on a table: BEER and LOVE. '+
                 'Your cousin Gary has been here already and taken DRUG, the third stock. '+
                 'Which stock do you want to take?'
         );
-        $('#controls').show().html('<label>Stock<select id="stock" name="stock">'+
+        $('#controls').empty().html('<label>Stock<select id="stock" name="stock">'+
         		'<option value="BEER" selected="selected">BEER</option>'+
         		'<option value="LOVE">LOVE</option></select></label>'
         );
+        $('#controlWrapper').show().css('width', 'auto');
     }
     else if (sbCount == 2) {
     	sbStock = $('#stock').val();
         $('.info').html('Good choice. You take 5 shares of '+ sbStock +' and venture into the wild. '+
                 '"Be careful," Professor Oak warns, "it\'s a blue-chip world out there."'
         );
+        $('#controlWrapper').hide();
+        $('#controls').empty();
     }
     else if (sbCount == 3) {
         $('.info').html('You encountered wild LOVE. LOVE wants to fight!');
-        // BEER used confusion!
-        // BLUE used dividend! BLUE used transform! BLUE is now RED!
-        // DRUG used depression!
-        // BUBL used ponzi scheme!
-        // LOVE used split! LOVE cheated!
     }
     else if (sbCount == 4) {
         fightLove();
@@ -429,8 +431,32 @@ function seriousBusiness() {
 
 function fightLove() {
     $('.info').html('The wild LOVE is worth $24. LOVE attacks first. LOVE uses split! There are now two of LOVE at $12 each!');
-    // Update your controls, which depend on which stock you own.
-    // Clicking the controls plays a new round against LOVE.
+    if (sbStock == 'LOVE') {
+    	$('#controls').html('<input type="submit" id="cheat" name="cheat" value="Cheat" />');
+    }
+    else if (sbStock == 'BEER') {
+    	$('#controls').html('<input type="submit" id="confuse" name="confuse" value="Confuse" />');
+    }
+    $('#controlWrapper').show();
+    $('#continue').hide();
+    lovePrice = 12;
+    $('#controls').submit(function(e) {
+    	e.preventDefault();
+    	var move = sbStock == 'LOVE' ? 'Cheat' : 'Confuse';
+    	lovePrice -= 4;
+    	$('.info').html('You used '+ move +' on wild LOVE. LOVE\'s price was reduced to $'+ lovePrice +'!');
+    	if (lovePrice == 0) {
+    		$('.info').append('<br />&nbsp;<br />You ruined LOVE! It went bankrupt!');
+            $('#continue').show();
+            $('#controls').empty().hide();
+    	}
+    	else {
+    		$('.info').append('<br />&nbsp;<br />The wild LOVE cheated on you! One of your '+ sbStock +'s was destroyed.');
+    	}
+    });
+    // BLUE used dividend! BLUE used transform! BLUE is now RED!
+    // DRUG used depression!
+    // BUBL used ponzi scheme!
 }
 
 function fightGary() {
