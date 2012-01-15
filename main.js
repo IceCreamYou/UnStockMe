@@ -198,7 +198,7 @@ function drawAmounts() {
             $tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td><td class="change">' + dollarChange + '</td></tr>');
         }
     }
-    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td></tr>');
+    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td><td class="change"> &ndash;</td></tr>');
     $tbody.append('<tr><td colspan="4" class="totalval"><strong>Total portfolio value:</strong> $'+ totalVal +'</td></tr>');
 
     // Highlight terms when you mouse over them.
