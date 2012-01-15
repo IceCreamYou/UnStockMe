@@ -1,7 +1,5 @@
 /**
  *
-display the delta for each stock
-
 GIVEN ENOUGH TIME: BUGS:
 only show stocks in the table that we've introduced so far
 get rid of excess whitespace above control box
@@ -45,6 +43,7 @@ $(document).ready(function() {
             page = 'game';
             $.get('index.html', function(data) {
                 $('#content').html($(data).find('#content'));
+                // TODO: show the .note from the last round of the main game
                 drawAmounts();
             });
             drawAmounts();
@@ -205,7 +204,7 @@ function drawAmounts() {
             $tbody.append('<tr class="tr' + name + '"><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td><td class="change">' + dollarChange + '</td></tr>');
         }
     }
-    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td></tr>');
+    $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td><td class="change"> &ndash;</td></tr>');
     $tbody.append('<tr><td colspan="4" class="totalval"><strong>Total portfolio value:</strong> $'+ totalVal +'</td></tr>');
 
     // Highlight terms when you mouse over them.
@@ -464,6 +463,15 @@ function seriousBusiness() {
                 'You\'ve earned the right to continue on your way to a life of tricking people into giving you their money. '+
                 'Good work!'
         );
+    }
+    else if (sbCount == 9) {
+    	$('body').addClass('black');
+    	$('.info').html('Oh no! Gary was only pretending to sneak away! '+
+    			'He actually went and lobbied Congress to pass SOPA and PIPA! '+
+    			'The internet has died! Game over. We all lose.'+
+    			'<br />&nbsp;<br />This could really happen. '+
+    			'Please join us in <a href="http://protestsopa.org/">protesting SOPA</a> to save your LOVE on the internet.'
+    	);
         $('#continue').hide();
     }
 }
@@ -487,7 +495,8 @@ function fightLove() {
     	if (lovePrice == 0) {
     		$('.info').append('<br />&nbsp;<br />You ruined LOVE! It went bankrupt!');
             $('#continue').show();
-            $('#controls').empty().hide();
+            $('#controls').empty();
+            $('#controlWrapper').hide();
     	}
     	else {
     		$('.info').append('<br />&nbsp;<br />The wild LOVE cheated on you! One of your '+ sbStock +'s was destroyed.');
@@ -500,8 +509,59 @@ function fightLove() {
 
 function fightGary() {
     $('.info').html('Gary\'s portfolio is worth $50! '+
-            'Gary used insider information! His stock prices go up 10%!'
+            'Gary used insider information! His stock value went up 10% to $55!'
     );
-    //$('.info').html('BUBL used disruptive technology! Gary\'s stock is now obsolete! Critical hit!');
-    //$('.info').html('Gary counters by lobbying congress to pass SOPA! Booo, Gary.');
+    //$('.info').html('Gary's BUBL used disruptive technology! One of your shares of LOVE is now obsolete! Critical hit!');
+
+    if (sbStock == 'LOVE') {
+    	$('#controls').html('<input type="submit" id="cheat" name="cheat" value="Cheat" />');
+    }
+    else if (sbStock == 'BEER') {
+    	$('#controls').html('<input type="submit" id="confuse" name="confuse" value="Confuse" />');
+    	$('#controls').append('<input type="submit" id="cheat" name="cheat" value="Cheat" />');
+    }
+    $('#controlWrapper').show();
+    $('#continue').hide();
+    lovePrice = 12;
+    garyValue = 55;
+    sbSubmitButton = null;
+    $('#controls').submit(function(e) {
+    	e.preventDefault();
+    	garyValue -= Math.max(Math.floor(garyValue / 2), 10);
+    	$('.info').html('You used '+ sbSubmitButton +' on Gary\'s portfolio reducing its value to $'+ garyValue +'!');
+    	if (garyValue <= 10) {
+    		$('.info').append('<br />&nbsp;<br />Critical hit! Gary\'s portfolio value is extremely low!');
+            $('#continue').show();
+            $('#controls').empty();
+            $('#controlWrapper').hide();
+    	}
+    	else {
+    		var garyStock = ['BLUE', 'DRUG', 'BUBL'].getRandomElement();
+    		var garyAction = '';
+    		if (garyStock == 'BLUE') {
+    			if (Math.random() < 0.5) {
+    				garyAction = ' used dividend! Gary\'s portfolio regained $5 value!';
+    				garyValue += 5;
+    			}
+    			else {
+    				garyAction = ' used transform! Gary\'s BLUE is now RED! You are confused.';
+    			}
+    		}
+    		else if (garyStock == 'DRUG') {
+    			garyAction = ' used depression! The entire stock market crashed! Both of your portfolios lost $10.';
+    			garyValue -= 10;
+    		}
+    		else if (garyStock == 'BUBL') {
+    			if (Math.random() < 0.5) {
+    				garyAction = ' used disruptive technology! One of your shares of LOVE is now obsolete! Critical hit!';
+    			}
+    			else {
+    				garyAction = ' used ponzi scheme! Your investments in whizgizmos tanked, reducing your portfolio value by $8.';
+    			}
+    		}
+    		$('.info').append('<br />&nbsp;<br />Gary\'s '+ garyStock + garyAction);
+    	}
+    }).on('keyup mouseup', function(e) {
+    	sbSubmitButton = e.target.name;
+    });
 }
