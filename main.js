@@ -39,6 +39,7 @@ $(document).ready(function() {
     $('#continue').submit(function(e) {
         e.preventDefault();
         if (page == 'congrats') {
+        	resetChange();
             page = 'game';
             $.get('index.html', function(data) {
                 $('#content').html($(data).find('#content'));
@@ -66,6 +67,7 @@ $(document).ready(function() {
         else if (page == 'seriousBusiness') {
             $('body').addClass('black');
             seriousBusiness();
+            resetChange();
             return false;
         }
         else {
@@ -84,6 +86,7 @@ $(document).ready(function() {
                     $('#stock option[value="BEER"]').after('<option value="BUBL">BUBL</option>');
                 }
                 else if (page == 'congrats') {
+                	resetChange();
                     stocks.BUBL.changeValue(stocks.BUBL.value + 1);
                     $('#stock option[value="BEER"]').after('<option value="BLUE">BLUE</option>');
                     $('#stock option[value="BUBL"]').after('<option value="DRUG">DRUG</option>');
@@ -206,6 +209,15 @@ function drawAmounts() {
         }
       });
     });
+}
+
+function resetChange() {
+	 for (stock in stocks) {
+	        if (stocks.hasOwnProperty(stock)) {
+	            var stockValue = stocks[stock].value;
+	            stocks[stock].allValues.push(stockValue);
+	        }
+	 }
 }
 
 
