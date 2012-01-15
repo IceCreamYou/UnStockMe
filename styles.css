@@ -209,7 +209,8 @@ label {
   padding-bottom: 5px;
 }
 
-.value:before {
+.value:before,
+.change:before {
   content: "$";
 }
 

@@ -111,7 +111,7 @@ function stock(name, value) {
     this.changeValue = function(newValue) {
         this.allValues.push(newValue);
         this.value = newValue;
-    }
+    };
     this.buy = function(amount) {
         var cost = amount * this.value;
         if (cost <= money) {
@@ -122,7 +122,7 @@ function stock(name, value) {
             return true;
         }
         return Math.floor(money / this.value);
-    }
+    };
     this.sell = function(amount) {
         if (amount <= this.amount) {
             this.amount -= amount;
@@ -132,7 +132,7 @@ function stock(name, value) {
             return true;
         }
         return this.amount;
-    }
+    };
 }
 
 function buy() {
@@ -185,15 +185,19 @@ function validate() {
 function drawAmounts() {
     var $tbody = $('#stocks tbody');
     $tbody.empty();
+    $('#stocks thead').empty().append('<td>Stock</td><td>Price</td><td>Shares</td><td>Change</td>');
     var totalVal = money;
     for (name in stocks) {
         if (stocks.hasOwnProperty(name)) {
         	totalVal += stocks[name].value * stocks[name].amount;
-            $tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td></tr>');
+        	var dollarChange = stocks[name].value - stocks[name].allValues[stocks[name].allValues.length-2];
+        	if (!dollarChange)
+        		dollarChange = 0;
+            $tbody.append('<tr><td class="stock">'+ name +'</td><td class="value">'+ stocks[name].value +'</td><td class="amount">'+ stocks[name].amount +'</td><td class="change">' + dollarChange + '</td></tr>');
         }
     }
     $tbody.append('<tr><td class="stock cash">Cash</td><td class="value">'+ money +'</td><td class="amount">&ndash;</td></tr>');
-    $tbody.append('<tr><td colspan="3" class="totalval"><strong>Total portfolio value:</strong> $'+ totalVal +'</td></tr>');
+    $tbody.append('<tr><td colspan="4" class="totalval"><strong>Total portfolio value:</strong> $'+ totalVal +'</td></tr>');
 
     // Highlight terms when you mouse over them.
     $('.info-term').hover(function() {
@@ -297,7 +301,7 @@ var eventTypes = [
                       return this.stockName() + ' is releasing their quarterly earnings report tomorrow. Wall street analysts think they will hit their predictions, but you can never be sure.';
                   }, function() {
                       var stockPercent = stocks[this.stockName()].value * 0.1;
-                      return getRandBetween(-stockPercent*.5, stockPercent*1.5);
+                      return getRandBetween(-stockPercent*1, stockPercent*2.5);
                   }, function() {
                       if (this.delta < 0) {
                           return this.stockName() + ' missed their earnings predictions. Stock price fell by $' + this.delta + '.';
@@ -313,7 +317,7 @@ var eventTypes = [
                       return this.stockName() + ' is holding a surprise press release tomorrow. The news could be good or bad.';
                   }, function() {
                       var stockPercent = stocks[this.stockName()].value * 0.15;
-                      return getRandBetween(-stockPercent, stockPercent);
+                      return getRandBetween(-2*stockPercent, 2*stockPercent);
                   }, function() {
                       if (this.delta < 0) {
                           return 'One of ' + this.stockName() + '\'s key executives must resign due to health reasons. Stock price fell by $' + this.delta + '.';
@@ -322,14 +326,14 @@ var eventTypes = [
                           return this.stockName() + ' unveiled a new product for a rapidly growing market. Stock price rose by $' + this.delta + '.';
                       }
                       else {
-                          return this.stockName() + ' announced they will sponsor PennApps in the fall of 2012. Wall Street is unsure how it will play out. Stock price remained the same.';
+                          return this.stockName() + ' announced they will sponsor PennApps in the fall of 2012. Wall Street didn\'t seem to care. Stock price remained the same.';
                       }
                   }, null),
                   new event(function() {
                       return this.stockName() + '\'s largest competitor just went bankrupt. Generally, analysts see situations like this as an opportunity to gain market share. However, it may also be seen as a sign of a weak or struggling industry.';
                   }, function() {
                       var stockPercent = stocks[this.stockName()].value * 0.1;
-                      return getRandBetween(-stockPercent, stockPercent*1.5);
+                      return getRandBetween(-1.5*stockPercent, stockPercent*3);
                   }, function() {
                       if (this.delta < 0) {
                           return 'A large number of analysts think ' + this.stockName() + 'may be the next to file for Chapter 11. Stock price fell by $' + this.delta + '.';
@@ -345,7 +349,7 @@ var eventTypes = [
                       return 'Rumors have spread that ' + this.stockName() + '\'s CFO cooked the books. If these allegations prove true, they could be devastating.';
                   }, function() {
                       var stockPercent = stocks[this.stockName()].value * 0.1;
-                      return getRandBetween(-stockPercent*2.5, stockPercent);
+                      return getRandBetween(-stockPercent*3, stockPercent*1.5);
                   }, function() {
                       if (this.delta < 0) {
                           return this.stockName() + '\'s CFO was indicted by the SEC. Stock price fell by $' + this.delta + '.';
