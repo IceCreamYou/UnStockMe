@@ -43,6 +43,7 @@ $(document).ready(function() {
             page = 'game';
             $.get('index.html', function(data) {
                 $('#content').html($(data).find('#content'));
+                // TODO: show the .note from the last round of the main game
                 drawAmounts();
             });
             drawAmounts();
